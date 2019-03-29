@@ -6,7 +6,7 @@
 #include "sensor.h"
 //#include "bma400.h"
 
-//#define BMA400_ADDR_DEFAULT (BMA400_I2C_ADDRESS_SDO_LOW)
+#define DA217_ADDR_DEFAULT UINT8_C(0x27)
 
 int rt_hw_da217_init(const char *name, struct rt_sensor_config *cfg);
 

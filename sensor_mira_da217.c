@@ -3,7 +3,7 @@
 
 #define DBG_ENABLE
 #define DBG_LEVEL DBG_LOG
-#define DBG_SECTION_NAME  "sensor.bosch.da217"
+#define DBG_SECTION_NAME  "sensor.mira.da217"
 #define DBG_COLOR
 #include <rtdbg.h>
 

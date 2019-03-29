@@ -1,5 +1,5 @@
 
-#include "sensor_bosch_da217.h"
+#include "sensor_mira_da217.h"
 
 #define DBG_ENABLE
 #define DBG_LEVEL DBG_LOG
@@ -271,6 +271,7 @@ int rt_hw_da217_init(const char *name, struct rt_sensor_config *cfg)
 {
     rt_int8_t result;
     rt_sensor_t sensor_acce = RT_NULL;
+		rt_kprintf("zzzzz 111111\n");
 /*    struct da217_dev *_da217_dev = RT_NULL;
 
      _da217_dev = _da217_create(&cfg->intf);
@@ -287,13 +288,13 @@ int rt_hw_da217_init(const char *name, struct rt_sensor_config *cfg)
             return -RT_ERROR;
 
         sensor_acce->info.type       = RT_SENSOR_CLASS_ACCE;
-        sensor_acce->info.vendor     = RT_SENSOR_VENDOR_BOSCH;
+        sensor_acce->info.vendor     = RT_SENSOR_VENDOR_UNKNOWN;
         sensor_acce->info.model      = "da217_acce";
-        sensor_acce->info.unit       = RT_SENSOR_UNIT_PA;
+        sensor_acce->info.unit       = RT_SENSOR_UNIT_MG;
         sensor_acce->info.intf_type  = RT_SENSOR_INTF_I2C;
-        sensor_acce->info.range_max  = 110000;
-        sensor_acce->info.range_min  = 30000;
-        sensor_acce->info.period_min = 100;
+        sensor_acce->info.range_max  = 16000;
+        sensor_acce->info.range_min  = 2000;
+        sensor_acce->info.period_min = 1;
 
         rt_memcpy(&sensor_acce->config, cfg, sizeof(struct rt_sensor_config));
         sensor_acce->ops = &sensor_ops;

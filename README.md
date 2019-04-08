@@ -77,7 +77,7 @@ int rt_hw_da270_init(const char *name, struct rt_sensor_config *cfg);
 #### 初始化示例
 
 ```
-#include "sensor_mira_DA270.h"
+#include "sensor_mira_da270.h"
 
 int da270_port(void)
 {

@@ -40,8 +40,8 @@
  * patent rights of the copyright holder.
  *
  * @file       da270.h
- * @date       3 Apr 2019
- * @version    0.0.1
+ * @date       8 Apr 2019
+ * @version    1.0.0
  * @brief
  *
  */

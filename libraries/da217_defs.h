@@ -130,6 +130,9 @@
 #define DA217_DATA_ONLY          UINT8_C(0x00)
 #define DA217_DATA_SENSOR_TIME   UINT8_C(0x01)
 /**\name ODR configurations  */
+#define DA217_ODR_1_HZ        UINT8_C(0x00)
+#define DA217_ODR_1_95HZ     UINT8_C(0x01)
+#define DA217_ODR_3_9HZ      UINT8_C(0x02)
 #define DA217_ODR_7_81HZ     UINT8_C(0x03)
 #define DA217_ODR_15_63HZ    UINT8_C(0x04)
 #define DA217_ODR_31_25HZ    UINT8_C(0x05)
@@ -630,7 +633,8 @@ struct da217_int_pin_conf {
 struct da217_acc_conf {
 	/*! Output data rate
 	 * Assignable macros :
-	 *                      - DA217_ODR_7_81HZ  - DA217_ODR_15_63HZ
+	 *                      - DA217_ODR_1_HZ   - DA217_ODR_1_95HZ
+	 *  - DA217_ODR_3_9HZ   - DA217_ODR_7_81HZ  - DA217_ODR_15_63HZ
 	 *  - DA217_ODR_31_25HZ - DA217_ODR_62_5HZ  - DA217_ODR_125HZ   
 	 *  - DA217_ODR_250HZ   - DA217_ODR_500HZ   - DA217_ODR_1000HZ
 	 */

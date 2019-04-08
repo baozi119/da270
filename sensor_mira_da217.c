@@ -123,17 +123,25 @@ static rt_err_t _da217_set_odr(rt_sensor_t sensor, rt_uint16_t odr)
     struct da217_sensor_conf conf;
     uint8_t odr_ctr;
 
-    if (odr < 15)
+    if (odr == 1)
+        odr_ctr = DA217_ODR_1_HZ;
+    else if (odr <= 2)
+        odr_ctr = DA217_ODR_1_95HZ;
+    else if (odr <= 4)
+        odr_ctr = DA217_ODR_3_9HZ;
+    else if (odr <= 8)
+        odr_ctr = DA217_ODR_7_81HZ;
+    else if (odr <= 16)
         odr_ctr = DA217_ODR_15_63HZ;
-    else if (odr < 31)
+    else if (odr <= 32)
         odr_ctr = DA217_ODR_31_25HZ;
-    else if (odr < 62)
+    else if (odr <= 63)
         odr_ctr = DA217_ODR_62_5HZ;
-    else if (odr < 125)
+    else if (odr <= 125)
         odr_ctr = DA217_ODR_125HZ;
-    else if (odr < 250)
+    else if (odr <= 250)
         odr_ctr = DA217_ODR_250HZ;
-    else if (odr < 500)
+    else if (odr <= 500)
         odr_ctr = DA217_ODR_500HZ;
     else
         odr_ctr = DA217_ODR_1000HZ;
@@ -164,11 +172,11 @@ static rt_err_t _da217_set_range(rt_sensor_t sensor, rt_uint16_t range)
         struct da217_sensor_conf conf;
         uint8_t range_ctr;
 
-        if (range < 2000)
+        if (range <= 2000)
             range_ctr = DA217_2G_RANGE;
-        else if (range < 4000)
+        else if (range <= 4000)
             range_ctr = DA217_4G_RANGE;
-        else if (range < 8000)
+        else if (range <= 8000)
             range_ctr = DA217_8G_RANGE;
         else
             range_ctr = DA217_16G_RANGE;
@@ -307,26 +315,6 @@ int rt_hw_da217_init(const char *name, struct rt_sensor_config *cfg)
     }
 
     sensor_acce->parent.user_data = _da217_dev;
-//    struct da217_sensor_data comp_data;
-//    while(1){
-//        da217_get_accel_data(&comp_data, _da217_dev);
-//        rt_delay_ms(500);
-//    }
-				
+
     return RT_EOK;
 }
-
-int da217_port(void)
-{
-    struct rt_sensor_config cfg;
-    
-    cfg.intf.dev_name = "i2c1";
-    cfg.intf.user_data = (void *)DA217_ADDR_DEFAULT;
-    cfg.irq_pin.pin = RT_PIN_NONE;
-
-    rt_hw_da217_init("da217", &cfg);
-
-    return 0;
-}
-
-INIT_APP_EXPORT(da217_port);

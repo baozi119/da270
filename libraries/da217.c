@@ -322,10 +322,25 @@ int8_t da217_get_accel_data(struct da217_sensor_data *accel, const struct da217_
 int8_t da217_set_sensor_conf(const struct da217_sensor_conf *conf, uint16_t n_sett, const struct da217_dev *dev)
 {
 	int8_t rslt;
+	uint16_t idx = 0;
 
 	/* Check for null pointer in the device structure*/
 	rslt = null_ptr_check(dev);
-
+    if (rslt == DA217_OK) {
+        for (idx = 0; idx < n_sett; idx++) {
+            switch (conf[idx].type) {
+            case DA217_ACCEL:
+                /* Setting Accel configurations */
+                rslt = set_accel_conf(&conf[idx].param.accel, dev);
+                if (rslt == DA217_OK) {
+                    /* Set the INT pin mapping */
+                }
+                break;
+		    default:
+				rslt = DA217_E_INVALID_CONFIG;
+			}
+		}
+	}
 	return rslt;
 }
 
@@ -367,8 +382,6 @@ int8_t da217_get_sensor_conf(struct da217_sensor_conf *conf, uint16_t n_sett, co
 int8_t da217_get_device_conf(struct da217_device_conf *conf, uint8_t n_sett, const struct da217_dev *dev)
 {
 	int8_t rslt;
-	uint16_t idx = 0;
-	uint8_t data_array[3] = { 0 };
 
 	/* Check for null pointer in the device structure*/
 	rslt = null_ptr_check(dev);
